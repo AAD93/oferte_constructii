@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Oferte Construcții</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Librării pentru generare PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Generator de Oferte</h1>
+            <p>Completează datele de mai jos pentru a genera o ofertă profesională.</p>
+        </header>
+
+        <main>
+            <form id="offer-form">
+                <fieldset>
+                    <legend>Date Client</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="client-name">Nume Client / Firmă</label>
+                            <input type="text" id="client-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="client-phone">Telefon</label>
+                            <input type="tel" id="client-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="client-address">Adresă Lucrare</label>
+                            <input type="text" id="client-address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="offer-date">Data Ofertei</label>
+                            <input type="date" id="offer-date" required>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Servicii Ofertate</legend>
+                    <table id="services-table">
+                        <thead>
+                            <tr>
+                                <th>Denumire Serviciu</th>
+                                <th>U.M.</th>
+                                <th>Cantitate</th>
+                                <th>Preț Unitar (fără TVA)</th>
+                                <th>Total (fără TVA)</th>
+                                <th>Acțiune</th>
+                            </tr>
+                        </thead>
+                        <tbody id="services-body">
+                            <!-- Rândurile vor fi adăugate dinamic aici -->
+                        </tbody>
+                    </table>
+                    <button type="button" id="add-service-btn" class="btn btn-secondary">Adaugă Serviciu</button>
+                </fieldset>
+            </form>
+
+            <aside class="summary-card">
+                <h2>Rezumat Ofertă</h2>
+                <div class="summary-item">
+                    <span>Subtotal (fără TVA)</span>
+                    <span id="summary-subtotal">0.00 RON</span>
+                </div>
+                <div class="summary-item">
+                    <span>TVA (21%)</span>
+                    <span id="summary-vat">0.00 RON</span>
+                </div>
+                <hr>
+                <div class="summary-item total">
+                    <span>Total (cu TVA)</span>
+                    <span id="summary-total">0.00 RON</span>
+                </div>
+                <button id="generate-pdf-btn" class="btn btn-primary">Generează PDF</button>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Aici este structura ascunsă care va fi convertită în PDF -->
+    <div id="pdf-content">
+        <div class="pdf-page">
+            <div class="pdf-header">
+                <div class="company-details">
+                    <h2>NEO IDEAL CONSTRUCT S.R.L.</h2>
+                    <p>Reg. Com.: J2016000715039</p>
+                    <p>CUI: RO35928189</p>
+                    <p>Adresa: Str. DN 65B, nr. 465,Loc. Albota,Jud. Arges</p>
+                    <p>Telefon: 0772 241 271</p>
+                    <p>Email: neoideal2016@yahoo.com</p>
+                </div>
+            </div>
+
+            <h1 class="offer-title">OFERTĂ DE PREȚ</h1>
+
+            <div class="offer-meta">
+                <div class="client-data-pdf">
+                    <h3>Către:</h3>
+                    <p id="pdf-client-name"></p>
+                    <p id="pdf-client-phone"></p>
+                    <p id="pdf-client-address"></p>
+                </div>
+                <div class="offer-data-pdf">
+                    <p><strong>Nr. Ofertă:</strong> <span id="pdf-offer-code"></span></p>
+                    <p><strong>Data:</strong> <span id="pdf-offer-date"></span></p>
+                </div>
+            </div>
+
+            <div id="pdf-services-table-container">
+                <!-- Tabelul de servicii va fi clonat aici -->
+            </div>
+
+            <div class="pdf-summary">
+                <p><strong>Subtotal (fără TVA):</strong> <span id="pdf-subtotal"></span> RON</p>
+                <p><strong>TVA (21%):</strong> <span id="pdf-vat"></span> RON</p>
+                <h3 class="pdf-total"><strong>TOTAL (cu TVA):</strong> <span id="pdf-total"></span> RON</h3>
+            </div>
+
+            <div class="pdf-acceptance">
+                <h3>Acceptul Beneficiarului</h3>
+                <p id="pdf-client-name-end"></p>
+                
+            </div>
+
+                <p class="thank-you">Vă mulțumim pentru solicitare!</p>
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
