@@ -358,4 +358,7 @@ input:focus {
     .form-grid {
         grid-template-columns: 1fr;
     }
+    #services-table, #services-table thead, #services-table tbody, #services-table th, #services-table td, #services-table tr {
+        display:table
+    }
 }
