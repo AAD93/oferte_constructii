@@ -120,7 +120,7 @@ input:focus {
 }
 
 #services-table input {
-    width: 100%;
+    /*width: 100%;*/
     border: none;
     background-color: transparent;
 }
